@@ -3,8 +3,8 @@ import {Camera} from "lucide-react";
 import {Input} from "@/components/ui/forms/input.tsx";
 import {useEffect, useState} from "react";
 import {Item} from "@/lib/models/Item.ts";
-import axios from "axios";
 import ItemCard from "@/pages/home/components/item-card.tsx";
+import axios from "@/lib/axios.ts";
 
 const Home = () => {
 
@@ -14,7 +14,7 @@ const Home = () => {
   const [nextCursor, setNextCursor] = useState<string | null>(null)
 
   useEffect(() => {
-    axios.get('http://localhost:8787/items', {
+    axios.get('/items', {
       params: {
         query: query || null,
       }
@@ -27,7 +27,7 @@ const Home = () => {
   }, [query]);
 
   const loadMore = () => {
-    axios.get('http://localhost:8787/items', {
+    axios.get('/items', {
       params: {
         query: query || null,
         startCursor: nextCursor
